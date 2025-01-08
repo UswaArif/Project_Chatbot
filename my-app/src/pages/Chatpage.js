@@ -29,8 +29,13 @@ const ChatPage = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isBoxVisible, setIsBoxVisible] = useState(false);
 
     const open = Boolean(anchorEl);
+
+    const handleNewChatClick = () => {
+        setIsBoxVisible((prev) => !prev); // Toggle the visibility
+    };
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -257,7 +262,38 @@ const ChatPage = () => {
                 <Slidenav open={isDrawerOpen} toggleDrawer={toggleDrawer} />
             </Box>
             <Box>
-                <Chatslider />
+                <Chatslider onNewChatClick={handleNewChatClick} />
+                <Container
+                    maxWidth="sm"
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        padding: '100px 24px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100vh',
+                    }}
+                >
+                    {/* Conditionally render the box */}
+                    {isBoxVisible &&(
+                        <Box
+                            sx={{
+                                width: '300px',
+                                height: '200px',
+                                backgroundColor: '#f0f0f0',
+                                borderRadius: '8px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                            }}
+                        >
+                            <Typography variant="h6">New Chat Box</Typography>
+                        </Box>
+                    )}
+
+                </Container>
             </Box>
         </ThemeProvider>    
     );
