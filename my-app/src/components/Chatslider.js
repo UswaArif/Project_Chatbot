@@ -11,16 +11,15 @@ import Box from '@mui/material/Box';
 import IosShareIcon from '@mui/icons-material/IosShare';import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Chatslider = () => {
+const Chatslider = ({ onNewChatClick }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
-
     const open = Boolean(anchorEl);
 
     // Toggle the drawer open/close
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
-    };
+    }; 
 
     const chatList = [
         { titles: ['Chat with Alice', 'Chat with Bob'], date: '2024-12-10' },
@@ -75,6 +74,7 @@ const Chatslider = () => {
             {isDrawerOpen && (
                 <Button
                     variant="outlined"
+                    onClick={onNewChatClick}
                     sx={{
                         margin: '20px 20px',
                         display: 'flex',
@@ -94,6 +94,7 @@ const Chatslider = () => {
             {!isDrawerOpen && (
                 <Tooltip title='New Chat'>
                     <IconButton
+                    
                     sx={{
                         height: '40px',
                         width: '40px',
