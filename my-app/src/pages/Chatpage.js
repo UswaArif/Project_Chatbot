@@ -23,6 +23,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
+import Chatbox from '../components/Chatbox';
 
 const ChatPage = () => {
     // State to toggle between light and dark mode
@@ -76,6 +77,8 @@ const ChatPage = () => {
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
+
+    
 
     return ( 
         <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -258,43 +261,49 @@ const ChatPage = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Box>
-                <Slidenav open={isDrawerOpen} toggleDrawer={toggleDrawer} />
-            </Box>
-            <Box>
-                <Chatslider onNewChatClick={handleNewChatClick} />
-                <Container
-                    maxWidth="sm"
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        padding: '100px 24px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100vh',
-                    }}
-                >
-                    {/* Conditionally render the box */}
-                    {isBoxVisible &&(
-                        <Box
-                            sx={{
-                                width: '300px',
-                                height: '200px',
-                                backgroundColor: '#f0f0f0',
-                                borderRadius: '8px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                            }}
-                        >
-                            <Typography variant="h6">New Chat Box</Typography>
-                        </Box>
-                    )}
+            <Box sx={{ display: 'flex', height: '100vh' }}>
+                <Box>
+                    <Slidenav open={isDrawerOpen} toggleDrawer={toggleDrawer} />
+                </Box>
+                <Chatbox/>
 
-                </Container>
+                <Box>
+                    <Chatslider onNewChatClick={handleNewChatClick} />
+                    <Container
+                        maxWidth="sm"
+                        component="main"
+                        sx={{
+                            flexGrow: 1,
+                            padding: '100px 24px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100vh',
+                        }}
+                    >
+                        {/* Conditionally render the box */}
+                        {isBoxVisible &&(
+                            <Box
+                                sx={{
+                                    width: '300px',
+                                    height: '200px',
+                                    backgroundColor: '#f0f0f0',
+                                    borderRadius: '8px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                <Typography variant="h6">New Chat Box</Typography>
+                            </Box>
+                        )}
+
+                    </Container>
+                </Box>
             </Box>
+            
+
         </ThemeProvider>    
     );
 }
